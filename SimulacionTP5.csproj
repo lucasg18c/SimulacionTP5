@@ -48,6 +48,21 @@
   <ItemGroup>
     <Compile Include="Modelo\Empleado.cs" />
     <Compile Include="Modelo\Persona.cs" />
+    <Compile Include="Presentacion\Controles\DatoCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Controles\DatoCombo.designer.cs">
+      <DependentUpon>DatoCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Controles\DatoTxtNum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Controles\DatoTxtNum.designer.cs">
+      <DependentUpon>DatoTxtNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Controles\NumTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Servicios\SistemaColasCafeteria.cs" />
     <Compile Include="Presentacion\FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -58,6 +73,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\GestorCafeteria.cs" />
+    <EmbeddedResource Include="Presentacion\Controles\DatoCombo.resx">
+      <DependentUpon>DatoCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Controles\DatoTxtNum.resx">
+      <DependentUpon>DatoTxtNum.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
