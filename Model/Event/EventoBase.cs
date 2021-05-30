@@ -33,5 +33,7 @@ namespace SimulacionTP5.Model.Event
         }
 
         public abstract string GetNombre();
+
+        public abstract string[] Mostrar();
     }
 }

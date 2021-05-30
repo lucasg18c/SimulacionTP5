@@ -1,3 +1,4 @@
+using System;
 using SimulacionTP5.Model.Objetivos.ObjetivosCliente;
 using SimulacionTP5.Model.Objeto;
 using SimulacionTP5.Model.Server;
@@ -10,6 +11,7 @@ namespace SimulacionTP5.Model.Event
         private double media;    
         private double empleado1 = 0;    
         private double empleado2 = 0; 
+        private int idPersona;
         private ObjetivoCliente objetivo;   
 
         public FinEntrega(VectorEstado vectorEstado, double media) : base(vectorEstado)
@@ -20,6 +22,7 @@ namespace SimulacionTP5.Model.Event
         public override void Ejecutar()
         {
             Persona p = BuscarPersonaConEntrega();
+            idPersona = p.Id;
             p.AcumularPermanenciaColas();
 
             objetivo = ObjetivoCliente.ObtenerObjetivo();
@@ -113,7 +116,7 @@ namespace SimulacionTP5.Model.Event
 
         public override string GetNombre()
         {
-            return "Fin Entrega";
+            return $"Fin Entrega ({idPersona})";
         }
 
         public void Preparar(){
@@ -122,6 +125,17 @@ namespace SimulacionTP5.Model.Event
             empleado1 = vectorEstado.Anterior.FinEntrega.empleado1;
             empleado2 = vectorEstado.Anterior.FinEntrega.empleado2;
             objetivo = null;
+        }
+
+        public override string[] Mostrar()
+        {
+            return new string[] {
+                EntreTiempo == 0 ? "" : Math.Round(EntreTiempo, 2).ToString(),
+                empleado1 == 0 ? "" : Math.Round(empleado1, 2).ToString(),
+                empleado2 == 0 ? "" : Math.Round(empleado2, 2).ToString(),
+                objetivo == null ? "" : Math.Round(objetivo.Random, 2).ToString(),
+                objetivo == null ? "" : objetivo.GetNombre()
+            };
         }
     }
 }

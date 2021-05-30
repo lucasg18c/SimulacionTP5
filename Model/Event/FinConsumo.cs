@@ -1,5 +1,6 @@
 using SimulacionTP5.Model.Objeto;
 using SimulacionTP5.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace SimulacionTP5.Model.Event
     {
         private List<double> mesas;
         private double desde, hasta;
+        private int idPersona;
         public FinConsumo(VectorEstado vectorEstado, double desde, double hasta) : base(vectorEstado)
         {
             mesas = new List<double>();
@@ -19,6 +21,7 @@ namespace SimulacionTP5.Model.Event
         public override void Ejecutar()
         {
             Persona p = vectorEstado.BuscarPersonaPorRetirarse();
+            idPersona = p.Id;
             p.ContarCliente();
             p.AcumularPermanenciaCafeteria();
             p.Retirarse();
@@ -59,7 +62,7 @@ namespace SimulacionTP5.Model.Event
 
         public override string GetNombre()
         {
-            return "Fin Consumo";
+            return $"Fin Consumo ({idPersona})";
         }
         public List<double> GetTiempos()
         {
@@ -70,6 +73,17 @@ namespace SimulacionTP5.Model.Event
             EntreTiempo = 0;
             Tiempo = 0;
             mesas = vectorEstado.Anterior.FinConsumo.mesas.Select(i => i).ToList();
+        }
+
+        public override string[] Mostrar()
+        {
+            string[] res = new string[mesas.Count + 1];
+            res[0] = EntreTiempo == 0 ? "" : Math.Round(EntreTiempo, 2).ToString();
+
+            for (int i = 0; i < mesas.Count; i++){
+                res[i+1] = mesas[i] == 0 ? "" : Math.Round(mesas[i], 2).ToString();
+            }
+            return res;       
         }
     }
 }

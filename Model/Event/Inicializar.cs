@@ -14,7 +14,12 @@ namespace SimulacionTP5.Model.Event
 
         public override string GetNombre()
         {
-            return "Inicializar";
+            return "Inicialización";
+        }
+
+        public override string[] Mostrar()
+        {
+            return new string[]{};
         }
 
         protected override double CalcularEntreTiempo()

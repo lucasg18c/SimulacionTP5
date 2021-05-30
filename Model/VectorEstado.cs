@@ -13,38 +13,32 @@ namespace SimulacionTP5.Model
         public EventoBase EventoActual { get; set; }
         public double Reloj { get; set; }
         public LlegadaPersona LlegadaPersona { get; set; }
-
         public FinCompra FinCompra { get; set; }
         public FinEntrega FinEntrega { get; set; }
-
-        public void ContarCliente()
-        {
-            ContadorClientes++;
-        }
-
         public FinConsumo FinConsumo { get; set; }
         public FinUsoMesa FinUsoMesa { get; set; }
         public Duenio Duenio { get; set; }
-
-        public void AcumularPermanenciaColas(double tiempoLlegada)
-        {
-            ACTPermanenciaColas += Reloj - tiempoLlegada;
-        }
-
         public Empleado Empleado1 { get; set; }
         public Empleado Empleado2 { get; set; }
         public int ColaEmpleados { get; set; }
         public int MayorColaEmpleados { get; set; }
         public double ACTPermanenciaCafeteria { get; set; }
         public double ACTPermanenciaColas { get; set; }
+        public int ContadorClientes { get; set; }
+        public List<Persona> Personas;
 
         public void AcumularPermanenciaCafeteria(double tiempoLlegada)
         {
             ACTPermanenciaCafeteria += Reloj - tiempoLlegada;
         }
-
-        public int ContadorClientes { get; set; }
-        public List<Persona> Personas;
+        public void AcumularPermanenciaColas(double tiempoLlegada)
+        {
+            ACTPermanenciaColas += Reloj - tiempoLlegada;
+        }
+        public void ContarCliente()
+        {
+            ContadorClientes++;
+        }
 
         /// <summary>Ejecuta el evento de la iteración actual</summary>
         public void Simular()
@@ -52,8 +46,10 @@ namespace SimulacionTP5.Model
             EventoActual.Ejecutar();
         }
 
-        /// <summary>Prepara la iteración actual para la simulación: borra cálculos intermedios, mantiene tiempos 
-        /// de eventos próximos</summary> 
+        /// <summary>
+        /// Prepara la iteración actual para la simulación: borra cálculos intermedios, mantiene tiempos 
+        /// de eventos próximos.
+        ///</summary> 
         public void Preparar()
         {
             LlegadaPersona.Preparar();
@@ -71,26 +67,16 @@ namespace SimulacionTP5.Model
             ACTPermanenciaCafeteria = Anterior.ACTPermanenciaCafeteria;
             ACTPermanenciaColas = Anterior.ACTPermanenciaColas;
             ContadorClientes = Anterior.ContadorClientes;
-            Personas = Anterior.Personas.Select(p => p.Clone()).ToList();
+            Personas = Anterior.Personas.Select(p => p.CopiarYPreparar()).ToList();
         }
 
         public string[] MostrarPersonas()
         {
-            List<string> personas = new List<string>();
-
-            foreach(Persona p in Personas){
-                if (p.SeRetiro()){
-                    personas.Add("");
-                    personas.Add("");
-                    personas.Add("");
-                }
-                else{
-                personas.Add(p.Estado);
-                personas.Add(Math.Round(p.TiempoLlegada, 2).ToString());
-                personas.Add(Math.Round(p.ProximoFin, 2).ToString());
-                }
+            List<string> res = new List<string>();
+            foreach( Persona p in Personas){
+                res.AddRange(p.Mostrar());
             }
-            return personas.ToArray();
+            return res.ToArray();
         }
 
         public void ActualizarTiemposLibres()
@@ -102,55 +88,43 @@ namespace SimulacionTP5.Model
 
         public string[] MostrarFinUsoMesa()
         {
-            return FinUsoMesa.GetTiempos().Select(
-                mesa => Math.Round(mesa, 2).ToString()
-            ).ToArray();
+            List<string> res = new List<string>();
+            res.AddRange(FinUsoMesa.Mostrar());
+            return res.ToArray();
         }
 
         public string[] MostrarFinConsumo()
         {
-            List<string> lista = new List<string>();
-            lista.Add($"{Math.Round(FinConsumo.EntreTiempo, 2)}");
-            lista.AddRange(FinConsumo.GetTiempos().Select(mesa => $"{Math.Round(mesa, 2)}")); 
-            return lista.ToArray();
+            List<string> res = new List<string>();
+            res.AddRange(FinConsumo.Mostrar());
+            return res.ToArray();
         }
 
         public string[] MostrarSeccion2()
         {
-            return new string[] {
-                Duenio.Estado,
-                $"{Duenio.Cola}",
-                $"{Duenio.MayorCola}",
-                $"{Math.Round(Duenio.ACTiempoLibre, 2)}",
-                Empleado1.Estado,
-                $"{Math.Round(Empleado1.ACTiempoLibre, 2)}",
-                Empleado2.Estado,
-                $"{Math.Round(Empleado2.ACTiempoLibre, 2)}",
-                $"{ColaEmpleados}",
-                $"{MayorColaEmpleados}",
-                $"{Math.Round(ACTPermanenciaCafeteria, 2)}",
-                $"{Math.Round(ACTPermanenciaColas, 2)}",
-                $"{ContadorClientes}"
-            };
+            List<string> res = new List<string>();
+            res.AddRange(Duenio.Mostrar());
+            res.AddRange(Empleado1.Mostrar());
+            res.AddRange(Empleado2.Mostrar());
+            res.Add(ColaEmpleados.ToString());
+            res.Add(MayorColaEmpleados.ToString());
+            res.Add(Math.Round(ACTPermanenciaCafeteria, 2).ToString());
+            res.Add(Math.Round(ACTPermanenciaColas, 2).ToString());
+            res.Add(ContadorClientes.ToString());
+
+            return res.ToArray();
         }
 
         public string[] MostrarSeccion1()
         {
-            return new string[] {
-                EventoActual.GetNombre(),
-                $"{Math.Round(Reloj, 2)}",
-                $"{Math.Round(LlegadaPersona.EntreTiempo, 2)}",
-                $"{Math.Round(LlegadaPersona.Tiempo, 2)}",
-                $"{Math.Round(LlegadaPersona.GetRandomObjetivo(), 2)}",
-                LlegadaPersona.GetNombreObjetivo(),
-                $"{Math.Round(FinCompra.Tiempo, 2)}",
-                $"{Math.Round(FinEntrega.EntreTiempo, 2)}",
-                $"{Math.Round(FinEntrega.GetEmpleado1(), 2)}",
-                $"{Math.Round(FinEntrega.GetEmpleado2(), 2)}",
-                $"{Math.Round(FinEntrega.GetRandomObjetivo(), 2)}",
-                FinEntrega.GetNombreObjetivo(),
-                $"{Math.Round(FinUsoMesa.EntreTiempo, 2)}"
-            };
+            List<string> res = new List<string>();
+            res.Add(EventoActual.GetNombre());
+            res.Add(Math.Round(Reloj, 2).ToString());
+            res.AddRange(LlegadaPersona.Mostrar());
+            res.AddRange(FinCompra.Mostrar());
+            res.AddRange(FinEntrega.Mostrar());
+
+            return res.ToArray();
         }
 
         public void RecibirEntrega(Persona persona)

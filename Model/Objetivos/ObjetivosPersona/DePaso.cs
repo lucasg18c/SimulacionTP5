@@ -10,7 +10,7 @@ namespace SimulacionTP5.Model.Objetivos.ObjetivosPersona
 
         public override void Ejecutar(Persona persona)
         {
-            persona.Retirarse();
+            persona.DePaso();
         }
 
         public override string GetNombre()

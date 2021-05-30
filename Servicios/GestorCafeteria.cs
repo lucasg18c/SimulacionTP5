@@ -29,7 +29,7 @@ namespace SimulacionTP5.Servicios
             }
             catch (Exception e)
             {
-                form.MostrarExcepcion(e.Message);
+                form.MostrarExcepcion(e.StackTrace);
             }
             finally
             {

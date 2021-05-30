@@ -1,3 +1,4 @@
+using System;
 using SimulacionTP5.Model.Objeto;
 
 namespace SimulacionTP5.Model.Server
@@ -13,6 +14,13 @@ namespace SimulacionTP5.Model.Server
             this.vectorEstado = vectorEstado;
             ACTiempoLibre = 0;
             Libre();
+        }
+
+        public string[] Mostrar(){
+            return new string[] {
+                Estado,
+                Math.Round(ACTiempoLibre, 2).ToString()
+            };
         }
 
         public bool EstaOcupado(){

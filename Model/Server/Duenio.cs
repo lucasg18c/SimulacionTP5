@@ -1,3 +1,4 @@
+using System;
 using SimulacionTP5.Model.Objeto;
 
 namespace SimulacionTP5.Model.Server
@@ -16,6 +17,15 @@ namespace SimulacionTP5.Model.Server
             Cola = 0;
             ACTiempoLibre = 0;
             this.vectorEstado = vectorEstado;
+        }
+
+        public string[] Mostrar(){
+            return new string[] {
+                Estado,
+                Cola.ToString(),
+                MayorCola.ToString(),
+                Math.Round(ACTiempoLibre, 2).ToString()
+            };
         }
 
         public void AtenderCompra(Persona atendiendo){            

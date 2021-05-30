@@ -1,3 +1,4 @@
+using System;
 using SimulacionTP5.Model.Objeto;
 
 namespace SimulacionTP5.Model.Event
@@ -5,6 +6,7 @@ namespace SimulacionTP5.Model.Event
     public class FinCompra : EventoBase
     {
         private double tiempoEntrega;
+        private int idPersona;
         public FinCompra(VectorEstado vectorEstado, double tiempoEntrega) : base(vectorEstado)
         {
             this.tiempoEntrega = tiempoEntrega;
@@ -14,6 +16,7 @@ namespace SimulacionTP5.Model.Event
         {
             Persona p = vectorEstado.BuscarPersonaSAC();
             p.RecibirEntrega();
+            idPersona = p.Id;
 
             vectorEstado.Duenio.Libre();
             Tiempo = 0;
@@ -54,12 +57,17 @@ namespace SimulacionTP5.Model.Event
 
         public override string GetNombre()
         {
-            return "Fin Compra";
+            return $"Fin Compra ({idPersona})";
         }
 
         public void Preparar(){
             EntreTiempo = 0;
             Tiempo = vectorEstado.Anterior.FinCompra.Tiempo;
+        }
+
+        public override string[] Mostrar()
+        {
+            return new string[] { Tiempo == 0 ? "" : Math.Round(Tiempo, 2).ToString() };
         }
     }
 }

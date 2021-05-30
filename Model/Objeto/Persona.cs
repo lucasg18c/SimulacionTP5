@@ -5,9 +5,20 @@ namespace SimulacionTP5.Model.Objeto
     public class Persona
     {
         private VectorEstado vectorEstado;
+        
+        ///Realmente no es un id único, es solo su posición en el vector
+        public int Id { get; set; } 
         public string Estado { get; set; }
         public double TiempoLlegada { get; set; }
         public double ProximoFin { get; set; }
+
+        public string[] Mostrar(){
+            return new string[] {
+                EstaBorrado() || EstaRetirado() ? "" : Estado,
+                TiempoLlegada == 0 ? "" : Math.Round(TiempoLlegada, 2).ToString(),
+                ProximoFin == 0 ? "" : Math.Round(ProximoFin, 2).ToString()
+            };
+        }
 
         public void ConsumirEnMesa()
         {
@@ -39,6 +50,8 @@ namespace SimulacionTP5.Model.Objeto
         public void Retirarse()
         {
             Estado = "Retirado";
+            TiempoLlegada = 0;
+            ProximoFin = 0;
         }
 
         public void AcumularPermanenciaCafeteria()
@@ -46,8 +59,16 @@ namespace SimulacionTP5.Model.Objeto
             vectorEstado.AcumularPermanenciaCafeteria(TiempoLlegada);
         }
 
-        public bool SeRetiro(){
+        public bool EstaRetirado(){
             return Estado == "Retirado";
+        }
+
+        public void Borrar(){
+            Estado = "Borrado";
+        }
+
+        public bool EstaBorrado(){
+            return Estado == "Borrado";
         }
 
         public void Comprar()
@@ -89,9 +110,25 @@ namespace SimulacionTP5.Model.Objeto
             Estado = "SAE";
         }
 
-        public Persona Clone()
+        public Persona CopiarYPreparar()
         {
-            return new Persona(vectorEstado.Anterior) {Estado =  this.Estado, TiempoLlegada = this.TiempoLlegada, ProximoFin = this.ProximoFin};
+            if (EstaRetirado()){
+                Borrar();
+            }
+            if (EstaDePaso()){
+                Retirarse();
+            }
+            return new Persona(vectorEstado.Anterior) {
+                Id = this.Id,
+                Estado = this.Estado, 
+                TiempoLlegada = this.TiempoLlegada, 
+                ProximoFin = this.ProximoFin
+            };
+        }
+
+        public bool EstaDePaso()
+        {
+            return Estado == "DP";
         }
 
         public void EsperandoAtencionEntrega()
@@ -113,8 +150,8 @@ namespace SimulacionTP5.Model.Objeto
         }
 
         public void DePaso(){
-            Retirarse();
-            //Estado = "DP";
+            //Retirarse();
+            Estado = "DP";
         }
 
         public void UsarMesa(){

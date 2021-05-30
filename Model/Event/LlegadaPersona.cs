@@ -9,6 +9,7 @@ namespace SimulacionTP5.Model.Event
     {
         private double media;
         private double desviacion;
+        private int idPersona;
         private ObjetivoPersona objetivo = null;
         public LlegadaPersona(VectorEstado vectorEstado, double media, double desviacion) : base(vectorEstado)
         {
@@ -22,7 +23,7 @@ namespace SimulacionTP5.Model.Event
             objetivo = ObjetivoPersona.ObtenerObjetivo(); 
             Persona p = new Persona(vectorEstado);    
             
-            int pos = BuscarPosPersonaRetirada();
+            int pos = BuscarPosPersonaBorrada();
 
             if (pos == -1){
                 vectorEstado.Personas.Add(p);
@@ -31,13 +32,15 @@ namespace SimulacionTP5.Model.Event
                 vectorEstado.Personas[pos] = p;
             }
             
+            p.Id = pos == -1 ? vectorEstado.Personas.Count : pos + 1;
+            idPersona = p.Id;
             objetivo.Ejecutar(p);            
         }
 
-        private int BuscarPosPersonaRetirada()
+        private int BuscarPosPersonaBorrada()
         {
             for (int i = 0; i < vectorEstado.Personas.Count; i++){
-                if (vectorEstado.Personas[i].SeRetiro()){
+                if (vectorEstado.Personas[i].EstaBorrado()){
                     return i;
                 }
             }
@@ -59,13 +62,23 @@ namespace SimulacionTP5.Model.Event
 
         public override string GetNombre()
         {
-            return "Llegada Persona";
+            return $"Llegada Persona ({idPersona})";
         }
 
         public void Preparar(){
             EntreTiempo = 0;
             Tiempo = vectorEstado.Anterior.LlegadaPersona.Tiempo;
             objetivo = null;
+        }
+
+        public override string[] Mostrar()
+        {
+            return new string[] {
+                EntreTiempo == 0 ? "" : Math.Round(EntreTiempo, 2).ToString(),
+                Math.Round(Tiempo, 2).ToString(),
+                objetivo == null ? "" : Math.Round(objetivo.Random, 2).ToString(),
+                objetivo == null ? "" : objetivo.GetNombre()
+            };
         }
     }
 }

@@ -32,8 +32,7 @@ namespace SimulacionTP5.Servicios
             "Empleado 1",
             "Empleado 2",
             "RND",
-            "Objetivo",
-            "Tiempo uso mesa"
+            "Objetivo"
         };
 
         private static readonly string[] columnasSeccion2 = new string[]{
@@ -210,14 +209,15 @@ namespace SimulacionTP5.Servicios
             }
 
             pos = columnasSeccion1.Length;
-            for(int i = 0; i < mFinUso; i++){
-                cols[pos + i] = $"Mesa {i + 1}";
+            cols[pos] = "Tiempo uso mesa";
+            for (int i = 1; i < mFinUso; i++){
+                cols[pos + i] = $"Mesa {i}";
             }
 
-            pos = columnasSeccion1.Length + mFinUso + 1;
-            cols[pos - 1] = "Tiempo Consumo"; 
-            for(int i = 0; i < mFinConsumo - 1; i++){
-                cols[pos + i] = $"Mesa {i + 1}";
+            pos = columnasSeccion1.Length + mFinUso;
+            cols[pos] = "Tiempo Consumo"; 
+            for(int i = 1; i < mFinConsumo; i++){
+                cols[pos + i] = $"Mesa {i}";
             }
 
             pos = columnasSeccion1.Length + mFinUso + mFinConsumo + columnasSeccion2.Length;
