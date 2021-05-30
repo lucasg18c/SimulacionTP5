@@ -1,4 +1,5 @@
 ﻿using SimulacionTP5.Servicios;
+using System;
 using System.Windows.Forms;
 
 namespace SimulacionTP5.Presentacion
@@ -11,39 +12,40 @@ namespace SimulacionTP5.Presentacion
             InitializeComponent();
             gestor = new GestorCafeteria(this);
         }
-        private void btnCalcular_Click(object sender, System.EventArgs e)
+        private void ClickBtnCalcular(object sender, System.EventArgs e)
         {
-            //gestor.Calcular();
+            gestor.Calcular();
         }
 
-        public int GetMediaLlegada()
+        public double GetMediaLlegada()
         {
-            return (int)txtMediaLlegada.Valor * 60;
+            return txtMediaLlegada.Valor;
         }
-        public int GetDesviacionLlegada()
+        public double GetDesviacionLlegada()
         {
-            return (int)txtDesviacionLlegada.Valor * 60;
+            return txtDesviacionLlegada.Valor;
         }
-        public int GetSegundosFinCompra()
+        public double GetDuracionCompra()
         {
-            return (int)txtSegFinCompra.Valor;
+            return txtDuracionCompra.Valor;
         }
-        public int GetSegundosDesdeFinUsoMesa()
+        public double GetDesdeUsoMesa()
         {
-            return (int)txtDesdeFinMesa.Valor * 60;
+            return txtDesdeUsoMesa.Valor;
         }
-        public int GetSegundosHastaFinUsoMesa()
+        public double GetHastaUsoMesa()
         {
-            return (int)txtHastaFinMesa.Valor * 60;
+            return txtHastaUsoMesa.Valor;
         }
-        public int GetSegundosDesdeFinConsumo()
+        public double GetDesdeConsumo()
         {
-            return (int)txtDesdeFinConsumo.Valor * 60;
+            return txtDesdeConsumo.Valor;
         }
-        public int GetSegundosHastaFinConsumo()
+        public double GetHastaConsumo()
         {
-            return (int)txtHastaFinConsumo.Valor * 60;
+            return txtHastaConsumo.Valor;
         }
+
         public int GetIterciones()
         {
             return (int)txtIteraciones.Valor;
@@ -54,11 +56,22 @@ namespace SimulacionTP5.Presentacion
         }
         public int GetCantidadAMostar()
         {
-            return (int)txtCantidadMostra.Valor;
+            return (int)txtCantidadMostrar.Valor;
         }
-        public int GetFinEntrega()
+
+        public void MostrarTabla(string[] fila)
         {
-            return (int)txtSegFinEntrega.Valor;
+            tablaCafeteria.Rows.Add(fila);
+        }
+
+        public void MostrarColumnas(string nombre, string cabecera)
+        {
+            tablaCafeteria.Columns.Add(nombre, cabecera);
+        }
+
+        public double GetMediaEntrega()
+        {
+            return txtMediaEntrega.Valor;
         }
         public void MostrarExcepcion(string excepcion)
         {
@@ -68,31 +81,29 @@ namespace SimulacionTP5.Presentacion
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        public void LimpiarTablaCalculo()
+
+        public void LimpiarTabla()
         {
+            tablaCafeteria.Columns.Clear();
             tablaCafeteria.Rows.Clear();
         }
 
-        public void MostrarResultado(string OcioE_1, string OcioE_2, string OcioDueño, string promedioEnCola
-            , string colaMaxDuenio, string lblColaMaxEmp)
+        public void MostrarResultado(string OcioE1, string OcioE2, string OcioDuenio, string colaEmpleados, string colaDuenio, string tiempoCafe, string tiempoColas)
         {
-            lblTiempOciosoEmp1.Text = OcioE_1;
-            lblTiempoOciosoEmp2.Text = OcioE_2;
-            lblTimepoOciosoDueño.Text = OcioDueño;
+            lblOcioEmpleado1.Text = OcioE1;
+            lblOcioEmpleado2.Text = OcioE2;
+            lblOcioDuenio.Text = OcioDuenio;
 
-            lblValorPromedioPermCola.Text = promedioEnCola;
+            lblColaEmpleados.Text = colaEmpleados;
+            lblColaDuenio.Text = colaDuenio;
 
-            lblCantidadColaMaxDuenio.Text = colaMaxDuenio;
-            lblCantidadColaMaxEmp.Text = lblColaMaxEmp;
-            //PrepararVentana();
+            lblTiempoCola.Text = tiempoColas;
+            lblTiempoCafe.Text = tiempoCafe;
         }
 
-        private void FrmPrincipal_Load(object sender, System.EventArgs e)
+        private void ClickBtnExportar(object sender, EventArgs e)
         {
-
+            gestor.Exportar();
         }
     }
 }

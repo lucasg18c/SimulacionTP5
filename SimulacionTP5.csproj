@@ -46,8 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modelo\Empleado.cs" />
-    <Compile Include="Modelo\Persona.cs" />
+    <Compile Include="Model\Event\EventoBase.cs" />
+    <Compile Include="Model\Event\FinCompra.cs" />
+    <Compile Include="Model\Event\FinConsumo.cs" />
+    <Compile Include="Model\Event\FinEntrega.cs" />
+    <Compile Include="Model\Event\FinUsoMesa.cs" />
+    <Compile Include="Model\Event\Inicializar.cs" />
+    <Compile Include="Model\Event\LlegadaPersona.cs" />
+    <Compile Include="Model\Objetivos\ObjetivoBase.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosCliente\ConsumirEnMesa.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosCliente\ObjetivoCliente.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosCliente\Retirarse.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosPersona\Comprar.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosPersona\DePaso.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosPersona\ObjetivoPersona.cs" />
+    <Compile Include="Model\Objetivos\ObjetivosPersona\UsarMesa.cs" />
+    <Compile Include="Model\Objeto\Persona.cs" />
+    <Compile Include="Model\Server\Duenio.cs" />
+    <Compile Include="Model\Server\Empleado.cs" />
+    <Compile Include="Model\VectorEstado.cs" />
     <Compile Include="Presentacion\Controles\DatoCombo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -63,7 +80,8 @@
     <Compile Include="Presentacion\Controles\NumTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Servicios\SistemaColasCafeteria.cs" />
+    <Compile Include="Servicios\Generador.cs" />
+    <Compile Include="Servicios\SCC.cs" />
     <Compile Include="Presentacion\FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,10 +7,10 @@ namespace SimulacionTP5.Servicios
     public class GestorCafeteria
     {
         private readonly FrmPrincipal form;
-        private SistemaColasCafeteria cafeteria;
+        private SCC cafeteria;
         private int iteraciones, mostrarDesde, cantidadMostrar;
-        private int mediaLlegada, desviacionLlegada, finCompra,
-            finEntrega, desdeFinUsoMesa, hastaFinUsoMesa,
+        private double mediaLlegada, desviacionLlegada, finCompra,
+            mediaEntrega, desdeFinUsoMesa, hastaFinUsoMesa,
             desdeFinConsumo, hastaFinConsumo;
 
         public GestorCafeteria(FrmPrincipal form)
@@ -39,37 +39,91 @@ namespace SimulacionTP5.Servicios
 
         private void MostrarResultado()
         {
-            //form.MostrarResultado(
-            //    $"$ {cafeteria.GetOcioEmp1()}",
-            //    $"$ {cafeteria.GetOcioEmp2()}",
-            //    $"$ {cafeteria.GetOcioDuenio()}",
-            //    $"$ {cafeteria.GetPromPermEnCola()}",
-            //    $"$ {cafeteria.GetColaMacDuenio()}",
-            //    $"$ {cafeteria.GetColamMaxEmpleados()}");
-            
+            // Mostrar tabla
+            form.LimpiarTabla();
+
+            string[] columnas = cafeteria.GetColumnas();
+            for (int i = 0; i < columnas.Length; i++)
+                form.MostrarColumnas($"col{i}", columnas[i]);
+
+            foreach (string[] fila in cafeteria.GetSimulacion())
+                form.MostrarTabla(fila);
+
+            // Mostrar métricas
+            form.MostrarResultado(
+                cafeteria.GetOcioEmpleado1(),
+                cafeteria.GetOcioEmpleado2(),
+                cafeteria.GetOcioDuenio(),
+                cafeteria.GetColaEmpleados(),
+                cafeteria.GetColaDuenio(),
+                cafeteria.GetTiempoCafeteria(),
+                cafeteria.GetTiempoColas() 
+            );
         }
 
         private void CalcularCafeteria()
         {
-            cafeteria = new SistemaColasCafeteria();
-
-            //cafeteria.Calcular(iteraciones,
-            //    mostrarDesde,cantidadMostrar,
-            //    mediaLlegada,desviacionLlegada,
-            //    finCompra,finEntrega,
-            //    desdeFinUsoMesa,hastaFinUsoMesa,
-            //    desdeFinConsumo,hastaFinConsumo);
+            cafeteria = new SCC();
+            cafeteria.Simular(
+                iteraciones, 
+                mostrarDesde, 
+                mostrarDesde + cantidadMostrar,
+                mediaLlegada, 
+                desviacionLlegada, 
+                desdeFinConsumo, 
+                hastaFinConsumo, 
+                desdeFinUsoMesa, 
+                hastaFinUsoMesa, 
+                finCompra, 
+                mediaEntrega);
         }
 
         private void Validar()
         {
             if (iteraciones == 0) throw new ApplicationException("La simulacion debe ser por lo menos de una fila");
             if (mostrarDesde >= iteraciones) throw new ApplicationException("El mostrar desde debe ser menor a las iteraciones, para poder mostrar algo");
-            if (finCompra <= 0 && finEntrega <= 0) throw new ApplicationException("Los tiempos en segundos deben ser positivos");
+            if (finCompra <= 0 && mediaEntrega <= 0) throw new ApplicationException("Los tiempos en segundos deben ser positivos");
             if (desdeFinUsoMesa >= hastaFinUsoMesa) throw new ApplicationException("Valores Fin uso de mesa incorrectos, valor desde debe ser menor a valor Hasta");
             if (desdeFinConsumo >= hastaFinConsumo) throw new ApplicationException("Valores Fin consumo incorrectos, Valor Desde es mayor a Valor Hasta");
             //No recuerdo si la media y desviacion estandar tiene algunas restrcciones de valores
         }
+
+        public void Exportar()
+        {
+            string tabla = "";
+            string[] columnas = cafeteria.GetColumnas();
+            int m = columnas.Length - 1;
+
+            for (int i = 0; i < m + 1; i++)
+            {
+                tabla += columnas[i];
+
+                if (i < m)
+                    tabla += "\t";
+            }
+            tabla += "\n";
+
+            string[][] filas = cafeteria.GetSimulacion();
+            int n = filas.Length - 1;
+
+            for (int i = 0; i < n + 1; i++)
+            {
+                for (int j = 0; j < m + 1; j++)
+                {
+                    tabla += filas[i][j];
+
+                    if (j < m)
+                        tabla += "\t";
+                }
+
+                if (i < n)
+                    tabla += "\n";
+            }
+
+            Clipboard.SetText(tabla);
+            form.MostrarExcepcion("listo xd");
+        }
+
         private void GetDatos()
         {
             iteraciones = form.GetIterciones();
@@ -78,15 +132,13 @@ namespace SimulacionTP5.Servicios
 
             mediaLlegada = form.GetMediaLlegada();
             desviacionLlegada = form.GetDesviacionLlegada();
-            finCompra = form.GetSegundosFinCompra();
-            finEntrega = form.GetFinEntrega();
+            finCompra = form.GetDuracionCompra();
+            mediaEntrega = form.GetMediaEntrega();
 
-            desdeFinUsoMesa = form.GetSegundosDesdeFinUsoMesa();
-            hastaFinUsoMesa = form.GetSegundosHastaFinUsoMesa();
-            desdeFinConsumo = form.GetSegundosDesdeFinConsumo();
-            hastaFinConsumo = form.GetSegundosHastaFinConsumo();
-            
-
+            desdeFinUsoMesa = form.GetDesdeUsoMesa();
+            hastaFinUsoMesa = form.GetHastaUsoMesa();
+            desdeFinConsumo = form.GetDesdeConsumo();
+            hastaFinConsumo = form.GetHastaConsumo();
         }
     }
 }
