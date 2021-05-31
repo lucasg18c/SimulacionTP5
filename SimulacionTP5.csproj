@@ -80,6 +80,30 @@
     <Compile Include="Presentacion\Controles\NumTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Presentacion\Pantallas\ErrorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\ErrorControl.Designer.cs">
+      <DependentUpon>ErrorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\InicioControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\InicioControl.Designer.cs">
+      <DependentUpon>InicioControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\PantallaBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\PantallaBase.Designer.cs">
+      <DependentUpon>PantallaBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\ResultadoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\ResultadoControl.Designer.cs">
+      <DependentUpon>ResultadoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Servicios\Generador.cs" />
     <Compile Include="Servicios\SCC.cs" />
     <Compile Include="Presentacion\FrmPrincipal.cs">
@@ -100,6 +124,18 @@
     <EmbeddedResource Include="Presentacion\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Pantallas\ErrorControl.resx">
+      <DependentUpon>ErrorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Pantallas\InicioControl.resx">
+      <DependentUpon>InicioControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Pantallas\PantallaBase.resx">
+      <DependentUpon>PantallaBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Pantallas\ResultadoControl.resx">
+      <DependentUpon>ResultadoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -108,6 +144,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -122,6 +159,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\taza-de-cafe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuCeleste.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

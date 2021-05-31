@@ -5,7 +5,7 @@ namespace SimulacionTP5.Servicios
     public class Generador
     {
         private static double[] serie;
-        private static double semilla = 123;//DateTime.Now.Ticks;
+        private static double semilla = DateTime.Now.Ticks;
         
         // Auxiliares para Box-Muller
         private static double randomBM = double.NaN;

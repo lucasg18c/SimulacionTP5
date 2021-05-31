@@ -1,4 +1,5 @@
-﻿using SimulacionTP5.Servicios;
+﻿using SimulacionTP5.Presentacion.Pantallas;
+using SimulacionTP5.Servicios;
 using System;
 using System.Windows.Forms;
 
@@ -12,9 +13,14 @@ namespace SimulacionTP5.Presentacion
             InitializeComponent();
             gestor = new GestorCafeteria(this);
         }
-        private void ClickBtnCalcular(object sender, System.EventArgs e)
+        private void ClickBtnSimular(object sender, EventArgs e)
         {
-            gestor.Calcular();
+            gestor.Simular();
+        }
+
+        private void ClickBtnExportar(object sender, EventArgs e)
+        {
+            gestor.Exportar();
         }
 
         public double GetMediaLlegada()
@@ -25,6 +31,12 @@ namespace SimulacionTP5.Presentacion
         {
             return txtDesviacionLlegada.Valor;
         }
+
+        public void PermitirExportar(bool permitir)
+        {
+            btnExportar.Visible = permitir;
+        }
+
         public double GetDuracionCompra()
         {
             return txtDuracionCompra.Valor;
@@ -45,7 +57,12 @@ namespace SimulacionTP5.Presentacion
         {
             return txtHastaConsumo.Valor;
         }
-
+        public void MostrarPantallaResultado()
+        {
+            resultadoControl.Visible = true;
+            inicioControl.Visible = false;
+            errorControl.Visible = false;
+        }
         public int GetIterciones()
         {
             return (int)txtIteraciones.Valor;
@@ -59,51 +76,59 @@ namespace SimulacionTP5.Presentacion
             return (int)txtCantidadMostrar.Valor;
         }
 
-        public void MostrarTabla(string[] fila)
+        public void MostrarTabla(string[][] tabla)
         {
-            tablaCafeteria.Rows.Add(fila);
+            resultadoControl.MostrarTabla(tabla);
         }
 
-        public void MostrarColumnas(string nombre, string cabecera)
+        public void MostrarColumnas(string[] columnas)
         {
-            tablaCafeteria.Columns.Add(nombre, cabecera);
+            resultadoControl.MostrarColumnas(columnas);
         }
 
         public double GetMediaEntrega()
         {
             return txtMediaEntrega.Valor;
         }
-        public void MostrarExcepcion(string excepcion)
+        public void MostrarError(string error)
+        {
+            errorControl.MostrarError(error);
+            inicioControl.Visible = false;
+            resultadoControl.Visible = false;
+        }
+
+        public void MostrarInformacion(string mensaje, string titulo)
         {
             MessageBox.Show(
-                excepcion,
-                "Ocurrió un error",
+                mensaje,
+                titulo,
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+                MessageBoxIcon.Information);
         }
 
         public void LimpiarTabla()
         {
-            tablaCafeteria.Columns.Clear();
-            tablaCafeteria.Rows.Clear();
+            resultadoControl.LimpiarTabla();
         }
 
         public void MostrarResultado(string OcioE1, string OcioE2, string OcioDuenio, string colaEmpleados, string colaDuenio, string tiempoCafe, string tiempoColas)
         {
-            lblOcioEmpleado1.Text = OcioE1;
-            lblOcioEmpleado2.Text = OcioE2;
-            lblOcioDuenio.Text = OcioDuenio;
-
-            lblColaEmpleados.Text = colaEmpleados;
-            lblColaDuenio.Text = colaDuenio;
-
-            lblTiempoCola.Text = tiempoColas;
-            lblTiempoCafe.Text = tiempoCafe;
+            resultadoControl.MostrarResultado(OcioE1, OcioE2, OcioDuenio, colaEmpleados, colaDuenio, tiempoCafe, tiempoColas);
         }
 
-        private void ClickBtnExportar(object sender, EventArgs e)
+        public void Esperar(bool esperar)
         {
-            gestor.Exportar();
+            Cursor.Current = esperar ? Cursors.WaitCursor : Cursors.Default;
+        }
+
+        public void CopiarPortapapeles(string tabla)
+        {
+            Clipboard.SetText(tabla);
+        }
+
+        private void ClickBtnMenu(object sender, EventArgs e)
+        {
+            pnlLateral.Visible = !pnlLateral.Visible;
         }
     }
 }

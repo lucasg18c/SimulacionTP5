@@ -80,7 +80,7 @@ namespace SimulacionTP5.Servicios
                 actual.ActualizarTiemposLibres();
                 actual.Simular();
 
-                if (mostrarDesde <= i && i <= mostrarHasta){
+                if (mostrarDesde <= i && i < mostrarHasta){
                     Registrar(actual);
                 }
 
