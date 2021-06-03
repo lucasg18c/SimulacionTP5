@@ -93,38 +93,45 @@ namespace SimulacionTP5.Servicios
 
         public void Exportar()
         {
-            string tabla = "";
-            string[] columnas = cafeteria.GetColumnas();
-            int m = columnas.Length - 1;
-
-            for (int i = 0; i < m + 1; i++)
+            try
             {
-                tabla += columnas[i];
+                string tabla = "";
+                string[] columnas = cafeteria.GetColumnas();
+                int m = columnas.Length - 1;
 
-                if (i < m)
-                    tabla += "\t";
-            }
-            tabla += "\n";
-
-            string[][] filas = cafeteria.GetSimulacion();
-            int n = filas.Length - 1;
-
-            for (int i = 0; i < n + 1; i++)
-            {
-                for (int j = 0; j < m + 1; j++)
+                for (int i = 0; i < m + 1; i++)
                 {
-                    tabla += filas[i][j];
+                    tabla += columnas[i];
 
-                    if (j < m)
+                    if (i < m)
                         tabla += "\t";
                 }
+                tabla += "\n";
 
-                if (i < n)
-                    tabla += "\n";
+                string[][] filas = cafeteria.GetSimulacion();
+                int n = filas.Length - 1;
+
+                for (int i = 0; i < n + 1; i++)
+                {
+                    for (int j = 0; j < m + 1; j++)
+                    {
+                        tabla += filas[i][j];
+
+                        if (j < m)
+                            tabla += "\t";
+                    }
+
+                    if (i < n)
+                        tabla += "\n";
+                }
+
+                form.CopiarPortapapeles(tabla);
+                form.MostrarInformacion("La simulación ha sido copiada a portapapeles! :D", "Resultado copiado");
             }
-
-            form.CopiarPortapapeles(tabla);
-            form.MostrarInformacion("La simulación ha sido copiada a portapapeles! :D", "Resultado copiado");
+            catch (Exception e)
+            {
+                form.MostrarError("Ocurrió un error al exportar: " + e.Message);
+            }
         }
 
         private void GetDatos()

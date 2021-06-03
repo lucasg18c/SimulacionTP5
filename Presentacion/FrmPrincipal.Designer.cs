@@ -36,22 +36,11 @@
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlLateral = new System.Windows.Forms.Panel();
             this.pnlDatos = new System.Windows.Forms.Panel();
-            this.txtHastaConsumo = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
-            this.txtDesdeConsumo = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtHastaUsoMesa = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
-            this.txtDesdeUsoMesa = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtMediaEntrega = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtDuracionCompra = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtDesviacionLlegada = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
-            this.txtMediaLlegada = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtCantidadMostrar = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
-            this.txtMostrarDesde = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
-            this.txtIteraciones = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExportar = new System.Windows.Forms.Button();
@@ -62,6 +51,17 @@
             this.inicioControl = new SimulacionTP5.Presentacion.Pantallas.InicioControl();
             this.resultadoControl = new SimulacionTP5.Presentacion.Pantallas.ResultadoControl();
             this.errorControl = new SimulacionTP5.Presentacion.Pantallas.ErrorControl();
+            this.txtHastaConsumo = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtDesdeConsumo = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtHastaUsoMesa = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtDesdeUsoMesa = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtMediaEntrega = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtDuracionCompra = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtDesviacionLlegada = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtMediaLlegada = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtCantidadMostrar = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtMostrarDesde = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
+            this.txtIteraciones = new SimulacionTP4.Presentacion.Controles.DatoTxtNum();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -77,7 +77,7 @@
             this.btnSimular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimular.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnSimular.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSimular.Location = new System.Drawing.Point(0, 643);
+            this.btnSimular.Location = new System.Drawing.Point(0, 665);
             this.btnSimular.Name = "btnSimular";
             this.btnSimular.Size = new System.Drawing.Size(279, 50);
             this.btnSimular.TabIndex = 29;
@@ -94,14 +94,14 @@
             this.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopBar.Location = new System.Drawing.Point(0, 0);
             this.pnlTopBar.Name = "pnlTopBar";
-            this.pnlTopBar.Size = new System.Drawing.Size(944, 60);
+            this.pnlTopBar.Size = new System.Drawing.Size(1045, 60);
             this.pnlTopBar.TabIndex = 30;
             // 
             // pbMenu
             // 
             this.pbMenu.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pbMenu.Image = global::SimulacionTP5.Properties.Resources.MenuCeleste;
-            this.pbMenu.Location = new System.Drawing.Point(892, 12);
+            this.pbMenu.Location = new System.Drawing.Point(993, 12);
             this.pbMenu.Name = "pbMenu";
             this.pbMenu.Size = new System.Drawing.Size(35, 35);
             this.pbMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -140,9 +140,9 @@
             this.pnlLateral.Controls.Add(this.pnlMg1);
             this.pnlLateral.Controls.Add(this.btnSimular);
             this.pnlLateral.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlLateral.Location = new System.Drawing.Point(665, 60);
+            this.pnlLateral.Location = new System.Drawing.Point(766, 60);
             this.pnlLateral.Name = "pnlLateral";
-            this.pnlLateral.Size = new System.Drawing.Size(279, 693);
+            this.pnlLateral.Size = new System.Drawing.Size(279, 715);
             this.pnlLateral.TabIndex = 31;
             // 
             // pnlDatos
@@ -168,8 +168,181 @@
             this.pnlDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDatos.Location = new System.Drawing.Point(0, 0);
             this.pnlDatos.Name = "pnlDatos";
-            this.pnlDatos.Size = new System.Drawing.Size(279, 583);
+            this.pnlDatos.Size = new System.Drawing.Size(279, 605);
             this.pnlDatos.TabIndex = 33;
+            // 
+            // label11
+            // 
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(0, 652);
+            this.label11.Name = "label11";
+            this.label11.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label11.Size = new System.Drawing.Size(262, 35);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "Consumo en mesas (minutos)";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(0, 511);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label10.Size = new System.Drawing.Size(262, 35);
+            this.label10.TabIndex = 32;
+            this.label10.Text = "Uso de mesas (minutos)";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(0, 423);
+            this.label9.Name = "label9";
+            this.label9.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label9.Size = new System.Drawing.Size(262, 35);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Entrega de pedidos";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(0, 335);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label8.Size = new System.Drawing.Size(262, 35);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Compras";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(0, 194);
+            this.label7.Name = "label7";
+            this.label7.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label7.Size = new System.Drawing.Size(262, 35);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Llegada de personas";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
+            this.label6.Size = new System.Drawing.Size(262, 35);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Simulación";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 605);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(279, 5);
+            this.panel1.TabIndex = 32;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.btnExportar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnExportar.FlatAppearance.BorderSize = 0;
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnExportar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExportar.Location = new System.Drawing.Point(0, 610);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(279, 50);
+            this.btnExportar.TabIndex = 31;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Visible = false;
+            this.btnExportar.Click += new System.EventHandler(this.ClickBtnExportar);
+            // 
+            // pnlMg1
+            // 
+            this.pnlMg1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlMg1.Location = new System.Drawing.Point(0, 660);
+            this.pnlMg1.Name = "pnlMg1";
+            this.pnlMg1.Size = new System.Drawing.Size(279, 5);
+            this.pnlMg1.TabIndex = 30;
+            // 
+            // panel9
+            // 
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 60);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(10, 715);
+            this.panel9.TabIndex = 34;
+            // 
+            // panel10
+            // 
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel10.Location = new System.Drawing.Point(756, 60);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(10, 715);
+            this.panel10.TabIndex = 35;
+            // 
+            // panel11
+            // 
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel11.Location = new System.Drawing.Point(10, 765);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(746, 10);
+            this.panel11.TabIndex = 36;
+            // 
+            // inicioControl
+            // 
+            this.inicioControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
+            this.inicioControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inicioControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.inicioControl.ForeColor = System.Drawing.Color.White;
+            this.inicioControl.Location = new System.Drawing.Point(10, 60);
+            this.inicioControl.Margin = new System.Windows.Forms.Padding(5);
+            this.inicioControl.Name = "inicioControl";
+            this.inicioControl.Size = new System.Drawing.Size(746, 705);
+            this.inicioControl.TabIndex = 37;
+            // 
+            // resultadoControl
+            // 
+            this.resultadoControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
+            this.resultadoControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resultadoControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.resultadoControl.ForeColor = System.Drawing.Color.White;
+            this.resultadoControl.Location = new System.Drawing.Point(10, 60);
+            this.resultadoControl.Margin = new System.Windows.Forms.Padding(4);
+            this.resultadoControl.Name = "resultadoControl";
+            this.resultadoControl.Size = new System.Drawing.Size(746, 705);
+            this.resultadoControl.TabIndex = 38;
+            this.resultadoControl.Visible = false;
+            // 
+            // errorControl
+            // 
+            this.errorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
+            this.errorControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.errorControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.errorControl.ForeColor = System.Drawing.Color.White;
+            this.errorControl.Location = new System.Drawing.Point(10, 60);
+            this.errorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.errorControl.Name = "errorControl";
+            this.errorControl.Size = new System.Drawing.Size(746, 705);
+            this.errorControl.TabIndex = 39;
+            this.errorControl.Visible = false;
             // 
             // txtHastaConsumo
             // 
@@ -211,19 +384,6 @@
             this.txtDesdeConsumo.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
             this.txtDesdeConsumo.Valor = 4D;
             // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(0, 652);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label11.Size = new System.Drawing.Size(262, 35);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "Consumo en mesas (minutos)";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // txtHastaUsoMesa
             // 
             this.txtHastaUsoMesa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(61)))), ((int)(((byte)(77)))));
@@ -264,19 +424,6 @@
             this.txtDesdeUsoMesa.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
             this.txtDesdeUsoMesa.Valor = 11D;
             // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(0, 511);
-            this.label10.Name = "label10";
-            this.label10.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label10.Size = new System.Drawing.Size(262, 35);
-            this.label10.TabIndex = 32;
-            this.label10.Text = "Uso de mesas (minutos)";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // txtMediaEntrega
             // 
             this.txtMediaEntrega.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(61)))), ((int)(((byte)(77)))));
@@ -297,19 +444,6 @@
             this.txtMediaEntrega.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
             this.txtMediaEntrega.Valor = 50D;
             // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(0, 423);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label9.Size = new System.Drawing.Size(262, 35);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Entrega de pedidos";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // txtDuracionCompra
             // 
             this.txtDuracionCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(61)))), ((int)(((byte)(77)))));
@@ -329,19 +463,6 @@
             this.txtDuracionCompra.TextoAyuda = "";
             this.txtDuracionCompra.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
             this.txtDuracionCompra.Valor = 20D;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(0, 335);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label8.Size = new System.Drawing.Size(262, 35);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "Compras";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // txtDesviacionLlegada
             // 
@@ -383,19 +504,6 @@
             this.txtMediaLlegada.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
             this.txtMediaLlegada.Valor = 10D;
             // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(0, 194);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label7.Size = new System.Drawing.Size(262, 35);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Llegada de personas";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // txtCantidadMostrar
             // 
             this.txtCantidadMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(61)))), ((int)(((byte)(77)))));
@@ -413,7 +521,7 @@
             this.txtCantidadMostrar.TabIndex = 28;
             this.txtCantidadMostrar.Texto = "Cantidad a Mostrar";
             this.txtCantidadMostrar.TextoAyuda = "";
-            this.txtCantidadMostrar.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Reales;
+            this.txtCantidadMostrar.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Enteros;
             this.txtCantidadMostrar.Valor = 100D;
             // 
             // txtMostrarDesde
@@ -454,122 +562,14 @@
             this.txtIteraciones.Texto = "Iteraciones";
             this.txtIteraciones.TextoAyuda = "";
             this.txtIteraciones.TipoDato = SimulacionTP4.Presentacion.Controles.NumTextBox.TipoDato.Enteros;
-            this.txtIteraciones.Valor = 100000D;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(73)))), ((int)(((byte)(92)))));
-            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(10, 8, 0, 8);
-            this.label6.Size = new System.Drawing.Size(262, 35);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Simulación";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 583);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(279, 5);
-            this.panel1.TabIndex = 32;
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
-            this.btnExportar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnExportar.FlatAppearance.BorderSize = 0;
-            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnExportar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExportar.Location = new System.Drawing.Point(0, 588);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(279, 50);
-            this.btnExportar.TabIndex = 31;
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.UseVisualStyleBackColor = false;
-            this.btnExportar.Visible = false;
-            this.btnExportar.Click += new System.EventHandler(this.ClickBtnExportar);
-            // 
-            // pnlMg1
-            // 
-            this.pnlMg1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlMg1.Location = new System.Drawing.Point(0, 638);
-            this.pnlMg1.Name = "pnlMg1";
-            this.pnlMg1.Size = new System.Drawing.Size(279, 5);
-            this.pnlMg1.TabIndex = 30;
-            // 
-            // panel9
-            // 
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(0, 60);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(10, 693);
-            this.panel9.TabIndex = 34;
-            // 
-            // panel10
-            // 
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(655, 60);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(10, 693);
-            this.panel10.TabIndex = 35;
-            // 
-            // panel11
-            // 
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel11.Location = new System.Drawing.Point(10, 743);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(645, 10);
-            this.panel11.TabIndex = 36;
-            // 
-            // inicioControl
-            // 
-            this.inicioControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
-            this.inicioControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inicioControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.inicioControl.ForeColor = System.Drawing.Color.White;
-            this.inicioControl.Location = new System.Drawing.Point(10, 60);
-            this.inicioControl.Margin = new System.Windows.Forms.Padding(5);
-            this.inicioControl.Name = "inicioControl";
-            this.inicioControl.Size = new System.Drawing.Size(645, 683);
-            this.inicioControl.TabIndex = 37;
-            // 
-            // resultadoControl
-            // 
-            this.resultadoControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
-            this.resultadoControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resultadoControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.resultadoControl.ForeColor = System.Drawing.Color.White;
-            this.resultadoControl.Location = new System.Drawing.Point(10, 60);
-            this.resultadoControl.Margin = new System.Windows.Forms.Padding(4);
-            this.resultadoControl.Name = "resultadoControl";
-            this.resultadoControl.Size = new System.Drawing.Size(645, 683);
-            this.resultadoControl.TabIndex = 38;
-            this.resultadoControl.Visible = false;
-            // 
-            // errorControl
-            // 
-            this.errorControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
-            this.errorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.errorControl.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.errorControl.ForeColor = System.Drawing.Color.White;
-            this.errorControl.Location = new System.Drawing.Point(10, 60);
-            this.errorControl.Margin = new System.Windows.Forms.Padding(4);
-            this.errorControl.Name = "errorControl";
-            this.errorControl.Size = new System.Drawing.Size(645, 683);
-            this.errorControl.TabIndex = 39;
-            this.errorControl.Visible = false;
+            this.txtIteraciones.Valor = 10000D;
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(49)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(944, 753);
+            this.ClientSize = new System.Drawing.Size(1045, 775);
             this.Controls.Add(this.inicioControl);
             this.Controls.Add(this.resultadoControl);
             this.Controls.Add(this.errorControl);

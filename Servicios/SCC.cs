@@ -94,9 +94,9 @@ namespace SimulacionTP5.Servicios
 
         private void RegistrarMetricas(VectorEstado estado)
         {
-            ocioEmpleado1 = estado.Empleado1.ACTiempoLibre;
-            ocioEmpleado2 = estado.Empleado2.ACTiempoLibre;
-            ocioDuenio = estado.Duenio.ACTiempoLibre;
+            ocioEmpleado1 = estado.Empleado1.ACTiempoLibre * 100 / estado.Reloj;
+            ocioEmpleado2 = estado.Empleado2.ACTiempoLibre * 100 / estado.Reloj;
+            ocioDuenio = estado.Duenio.ACTiempoLibre * 100 / estado.Reloj;
             colaDuenio = estado.Duenio.MayorCola;
             colaEmpleados = estado.MayorColaEmpleados;
             tiempoCafeteria = estado.ContadorClientes != 0 ? estado.ACTPermanenciaCafeteria / estado.ContadorClientes : 0;
@@ -105,12 +105,16 @@ namespace SimulacionTP5.Servicios
 
         public string GetTiempoColas()
         {
-            return Math.Round(tiempoColas, 2).ToString();
+            if (tiempoColas < 60)
+                return $"{Math.Round(tiempoColas, 2)} segundos";
+            return $"{(int)(tiempoColas / 60)}' {(int)(tiempoColas % 60)}\"";
         }
 
         public string GetTiempoCafeteria()
         {
-            return Math.Round(tiempoCafeteria, 2).ToString();     
+            if (tiempoCafeteria < 60)
+                return $"{Math.Round(tiempoCafeteria, 2)} segundos";
+            return $"{(int)(tiempoCafeteria / 60)}' {(int)(tiempoCafeteria % 60)}\"";
         }
 
         public string GetColaDuenio()
@@ -125,17 +129,17 @@ namespace SimulacionTP5.Servicios
 
         public string GetOcioDuenio()
         {
-            return Math.Round(ocioDuenio, 2).ToString();
+            return $"{Math.Round(ocioDuenio, 2)}%";
         }
 
         public string GetOcioEmpleado2()
         {
-            return Math.Round(ocioEmpleado2, 2).ToString();
+            return $"{Math.Round(ocioEmpleado2, 2)}%";
         }
 
         public string GetOcioEmpleado1()
         {
-            return Math.Round(ocioEmpleado1, 2).ToString();
+            return $"{Math.Round(ocioEmpleado1, 2)}%";
         }
 
         private void Registrar(VectorEstado estado)
@@ -187,8 +191,7 @@ namespace SimulacionTP5.Servicios
         }
 
         public string[] GetColumnas(){
-            int mPersonas, mFinConsumo, mFinUso, lSeccion1, lSeccion2, m, n;
-            n = seccion1.Count;
+            int mPersonas, mFinConsumo, mFinUso, lSeccion1, lSeccion2, m;
 
             mPersonas = MayorLongitud(personas);
             mFinConsumo = MayorLongitud(finConsumo);

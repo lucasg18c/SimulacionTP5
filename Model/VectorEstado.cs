@@ -126,7 +126,6 @@ namespace SimulacionTP5.Model
 
             return res.ToArray();
         }
-
         public void RecibirEntrega(Persona persona)
         {
             EmpleadoLibre().Atender(persona);
