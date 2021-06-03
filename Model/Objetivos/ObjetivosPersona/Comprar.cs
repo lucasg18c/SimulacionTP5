@@ -15,6 +15,7 @@ namespace SimulacionTP5.Model.Objetivos.ObjetivosPersona
 
         public override void Ejecutar(Persona persona)
         {
+            persona.ContarCliente();
             persona.Comprar();
         }
     }

@@ -5,12 +5,13 @@ namespace SimulacionTP5.Servicios
     public class Generador
     {
         private static double[] serie;
-        private static double semilla = DateTime.Now.Ticks;
+        //private static double semilla = DateTime.Now.Ticks;
+        private static Random r = new Random();
         
         // Auxiliares para Box-Muller
         private static double randomBM = double.NaN;
         private static readonly double dosPI = 2 * Math.PI;
-        private static double temp1, temp2;
+        private static double temp1, temp2, tempNormal;
 
         private Generador()
         {
@@ -25,8 +26,11 @@ namespace SimulacionTP5.Servicios
 
         public static double GenerarUniforme()
         {
-            semilla = (86529D * semilla + 33554431D) % 33554432D;
-            return semilla / 33554432D;
+            //semilla = (86529D * semilla + 2581111D) % 33554432D;
+            //if (semilla == 0) semilla = DateTime.Now.Ticks;
+            //return semilla / 33554432D;
+
+            return r.NextDouble();
         }
 
         public static double GenerarExponencial(double media)
@@ -37,8 +41,9 @@ namespace SimulacionTP5.Servicios
         public static double GenerarNormal(double media, double desviacion)
         {
             if (double.IsNaN(randomBM)){
-                
-                temp1 = Math.Sqrt(-2 * Math.Log(GenerarUniforme()));
+
+                tempNormal = GenerarUniforme();
+                temp1 = Math.Sqrt(-2 * Math.Log(tempNormal == 0 ? tempNormal + GenerarUniforme() : tempNormal));
                 temp2 = dosPI * GenerarUniforme();
 
                 randomBM = temp1 * Math.Cos(temp2) * desviacion + media;

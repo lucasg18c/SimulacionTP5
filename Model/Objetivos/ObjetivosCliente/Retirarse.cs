@@ -10,8 +10,8 @@ namespace SimulacionTP5.Model.Objetivos.ObjetivosCliente
 
         public override void Ejecutar(Persona persona)
         {
-            persona.ContarCliente();
-            persona.AcumularPermanenciaCafeteria();
+            //persona.ContarCliente();
+            //persona.AcumularPermanenciaCafeteria();
             persona.Retirarse();
         }
 

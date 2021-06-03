@@ -78,6 +78,7 @@ namespace SimulacionTP5.Servicios
                 actual.Preparar();
                 actual.ElegirProximo();
                 actual.ActualizarTiemposLibres();
+                actual.ActualizarPermanencias();
                 actual.Simular();
 
                 if (mostrarDesde <= i && i < mostrarHasta){

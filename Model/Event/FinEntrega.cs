@@ -23,7 +23,7 @@ namespace SimulacionTP5.Model.Event
         {
             Persona p = BuscarPersonaConEntrega();
             idPersona = p.Id;
-            p.AcumularPermanenciaColas();
+            //p.AcumularPermanenciaColas();
 
             objetivo = ObjetivoCliente.ObtenerObjetivo();
             objetivo.Ejecutar(p);

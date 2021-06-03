@@ -24,8 +24,8 @@ namespace SimulacionTP5.Model.Event
         {
             Persona p = vectorEstado.BuscarPersonaPorRetirarse();
             idPersona = p.Id;
-            p.ContarCliente();
-            p.AcumularPermanenciaCafeteria();
+            //p.ContarCliente();
+            //p.AcumularPermanenciaCafeteria();
             p.Retirarse();
             mesas[mesas.IndexOf(vectorEstado.Reloj)] = 0;
         }

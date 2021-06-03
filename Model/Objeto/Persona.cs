@@ -37,11 +37,6 @@ namespace SimulacionTP5.Model.Objeto
             ProximoFin = vectorEstado.FinUsoMesa.RegistrarEvento();
         }
 
-        public void AcumularPermanenciaColas()
-        {
-            vectorEstado.AcumularPermanenciaColas(TiempoLlegada);
-        }
-
         public Persona(VectorEstado vectorEstado){
             this.vectorEstado = vectorEstado;
             TiempoLlegada = vectorEstado.Reloj; 
@@ -52,11 +47,6 @@ namespace SimulacionTP5.Model.Objeto
             Estado = "Retirado";
             TiempoLlegada = 0;
             ProximoFin = 0;
-        }
-
-        public void AcumularPermanenciaCafeteria()
-        {
-            vectorEstado.AcumularPermanenciaCafeteria(TiempoLlegada);
         }
 
         public bool EstaRetirado(){
@@ -124,6 +114,19 @@ namespace SimulacionTP5.Model.Objeto
                 TiempoLlegada = this.TiempoLlegada, 
                 ProximoFin = this.ProximoFin
             };
+        }
+
+        public void ActualizarPermanencia()
+        {
+            if (!EstaBorrado() && !EstaDePaso() && !EstaRetirado())
+            {
+                vectorEstado.AcumularPermanenciaCafeteria();
+
+                if (!EstaUsandoMesa())
+                {
+                    vectorEstado.AcumularPermanenciaColas();
+                }
+            }
         }
 
         public bool EstaDePaso()

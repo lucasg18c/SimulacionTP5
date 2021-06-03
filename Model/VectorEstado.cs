@@ -27,13 +27,13 @@ namespace SimulacionTP5.Model
         public int ContadorClientes { get; set; }
         public List<Persona> Personas;
 
-        public void AcumularPermanenciaCafeteria(double tiempoLlegada)
+        public void AcumularPermanenciaCafeteria()
         {
-            ACTPermanenciaCafeteria += Reloj - tiempoLlegada;
+            ACTPermanenciaCafeteria += Reloj - Anterior.Reloj;
         }
-        public void AcumularPermanenciaColas(double tiempoLlegada)
+        public void AcumularPermanenciaColas()
         {
-            ACTPermanenciaColas += Reloj - tiempoLlegada;
+            ACTPermanenciaColas += Reloj - Anterior.Reloj;
         }
         public void ContarCliente()
         {
@@ -84,6 +84,13 @@ namespace SimulacionTP5.Model
             Duenio.ActualizarTiempoLibre();
             Empleado1.ActualizarTiempoLibre();
             Empleado2.ActualizarTiempoLibre();
+        }
+
+        public void ActualizarPermanencias()
+        {
+            foreach (Persona p in Personas){
+                p.ActualizarPermanencia();
+            }
         }
 
         public string[] MostrarFinUsoMesa()
@@ -152,7 +159,7 @@ namespace SimulacionTP5.Model
             FinCompra = new FinCompra(this, tiempoCompra);
             FinEntrega = new FinEntrega(this, mediaEntrega);
             FinConsumo = new FinConsumo(this, desdeFinConsumo, hastaFinConsumo);
-            FinUsoMesa = new FinUsoMesa(this, desdeFinUsoMesa, hastaFinConsumo);
+            FinUsoMesa = new FinUsoMesa(this, desdeFinUsoMesa, hastaFinUsoMesa);
             Duenio = new Duenio(this);
             Empleado1 = new Empleado(this);
             Empleado2 = new Empleado(this);
