@@ -14,6 +14,8 @@ namespace SimulacionTP5.Model
         public double Reloj { get; set; }
         public LlegadaPersona LlegadaPersona { get; set; }
         public FinCompra FinCompra { get; set; }
+        public Inestable Inestable { get; set; }
+        public FinLimpieza FinLimpieza { get; set; }
         public FinEntrega FinEntrega { get; set; }
         public FinConsumo FinConsumo { get; set; }
         public FinUsoMesa FinUsoMesa { get; set; }
@@ -25,6 +27,8 @@ namespace SimulacionTP5.Model
         public double ACTPermanenciaCafeteria { get; set; }
         public double ACTPermanenciaColas { get; set; }
         public int ContadorClientes { get; set; }
+        public int ContadorPersonas { get; set; }
+
         public List<Persona> Personas;
 
         public void AcumularPermanenciaCafeteria()
@@ -38,6 +42,11 @@ namespace SimulacionTP5.Model
         public void ContarCliente()
         {
             ContadorClientes++;
+        }
+
+        public void ContarPersona()
+        {
+            ContadorPersonas++;
         }
 
         /// <summary>Ejecuta el evento de la iteración actual</summary>
@@ -54,6 +63,8 @@ namespace SimulacionTP5.Model
         {
             LlegadaPersona.Preparar();
             FinCompra.Preparar();
+            Inestable.Preparar();
+            FinLimpieza.Preparar();
             FinEntrega.Preparar();
             FinCompra.Preparar();
             FinUsoMesa.Preparar();
@@ -67,6 +78,7 @@ namespace SimulacionTP5.Model
             ACTPermanenciaCafeteria = Anterior.ACTPermanenciaCafeteria;
             ACTPermanenciaColas = Anterior.ACTPermanenciaColas;
             ContadorClientes = Anterior.ContadorClientes;
+            ContadorPersonas = Anterior.ContadorPersonas;
             Personas = Anterior.Personas.Select(p => p.CopiarYPreparar()).ToList();
         }
 
@@ -118,6 +130,7 @@ namespace SimulacionTP5.Model
             res.Add(Math.Round(ACTPermanenciaCafeteria, 2).ToString());
             res.Add(Math.Round(ACTPermanenciaColas, 2).ToString());
             res.Add(ContadorClientes.ToString());
+            res.Add(ContadorPersonas.ToString());
 
             return res.ToArray();
         }
@@ -129,6 +142,8 @@ namespace SimulacionTP5.Model
             res.Add(Math.Round(Reloj, 2).ToString());
             res.AddRange(LlegadaPersona.Mostrar());
             res.AddRange(FinCompra.Mostrar());
+            res.AddRange(Inestable.Mostrar());
+            res.AddRange(FinLimpieza.Mostrar());
             res.AddRange(FinEntrega.Mostrar());
 
             return res.ToArray();
@@ -157,6 +172,8 @@ namespace SimulacionTP5.Model
         public VectorEstado(double mediaLlegada, double desviacionLlegada, double desdeFinConsumo, double hastaFinConsumo, double desdeFinUsoMesa, double hastaFinUsoMesa, double tiempoCompra, double mediaEntrega){
             LlegadaPersona = new LlegadaPersona(this, mediaLlegada, desviacionLlegada);
             FinCompra = new FinCompra(this, tiempoCompra);
+            Inestable = new Inestable(this);
+            FinLimpieza = new FinLimpieza(this);
             FinEntrega = new FinEntrega(this, mediaEntrega);
             FinConsumo = new FinConsumo(this, desdeFinConsumo, hastaFinConsumo);
             FinUsoMesa = new FinUsoMesa(this, desdeFinUsoMesa, hastaFinUsoMesa);
@@ -169,6 +186,16 @@ namespace SimulacionTP5.Model
             ACTPermanenciaCafeteria = 0;
             ACTPermanenciaColas = 0;
             ContadorClientes = 0;
+        }
+
+        public List<string[]> GetRK()
+        {
+            return FinLimpieza.GetRK();
+        }
+
+        public bool HizoRK()
+        {
+            return FinLimpieza.HizoRK();
         }
 
         public void Inicializar(){
@@ -196,6 +223,20 @@ namespace SimulacionTP5.Model
             tiempoAnterior = Anterior.FinCompra.GetTiempo(); 
             if (0 < tiempoAnterior && tiempoAnterior < Reloj){
                 EventoActual = FinCompra;
+                Reloj = tiempoAnterior;
+            }
+
+            tiempoAnterior = Anterior.Inestable.GetTiempo();
+            if (0 < tiempoAnterior && tiempoAnterior < Reloj)
+            {
+                EventoActual = Inestable;
+                Reloj = tiempoAnterior;
+            }
+
+            tiempoAnterior = Anterior.FinLimpieza.GetTiempo();
+            if (0 < tiempoAnterior && tiempoAnterior < Reloj)
+            {
+                EventoActual = FinLimpieza;
                 Reloj = tiempoAnterior;
             }
 
@@ -236,6 +277,29 @@ namespace SimulacionTP5.Model
                 }
             }
             return null;   
+        }
+
+        public Persona BuscarPersonaBloqueada()
+        {
+            return Personas.Where(p => p.EstaBloqueado()).First();
+        }
+
+        /// <summary> Busca la próxima persona en estado Esperando Atención Compra, según su tiempo de llegada.</summary>
+        public Persona BuscarProximaEAC()
+        {
+            Persona proxima = null;
+
+            foreach (Persona p in Personas)
+            {
+                if (p.EstaEsperandoAtencionCompra())
+                {
+                    if (proxima == null || p.TiempoLlegada < proxima.TiempoLlegada)
+                    {
+                        proxima = p;
+                    }
+                }
+            }
+            return proxima;
         }
     }
 }

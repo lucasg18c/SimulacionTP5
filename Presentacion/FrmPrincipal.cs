@@ -1,6 +1,7 @@
 ﻿using SimulacionTP5.Presentacion.Pantallas;
 using SimulacionTP5.Servicios;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SimulacionTP5.Presentacion
@@ -37,6 +38,11 @@ namespace SimulacionTP5.Presentacion
             btnExportar.Visible = permitir;
         }
 
+        public void PermitirAlternar(bool permitir)
+        {
+            btnAlternar.Visible = permitir;
+        }
+
         public double GetDuracionCompra()
         {
             return txtDuracionCompra.Valor;
@@ -62,6 +68,8 @@ namespace SimulacionTP5.Presentacion
             resultadoControl.Visible = true;
             inicioControl.Visible = false;
             errorControl.Visible = false;
+            tiemposLimpiezaControl.Visible = false;
+            btnAlternar.Text = "Ver R-K Limpieza";
         }
         public int GetIterciones()
         {
@@ -95,6 +103,7 @@ namespace SimulacionTP5.Presentacion
             errorControl.MostrarError(error);
             inicioControl.Visible = false;
             resultadoControl.Visible = false;
+            tiemposLimpiezaControl.Visible = false;
         }
 
         public void MostrarInformacion(string mensaje, string titulo)
@@ -109,6 +118,11 @@ namespace SimulacionTP5.Presentacion
         public void LimpiarTabla()
         {
             resultadoControl.LimpiarTabla();
+        }
+
+        public void LimpiarTablaTiemposLimpieza()
+        {
+            tiemposLimpiezaControl.LimpiarTabla();
         }
 
         public void MostrarResultado(string OcioE1, string OcioE2, string OcioDuenio, string colaEmpleados, string colaDuenio, string tiempoCafe, string tiempoColas)
@@ -129,6 +143,30 @@ namespace SimulacionTP5.Presentacion
         private void ClickBtnMenu(object sender, EventArgs e)
         {
             pnlLateral.Visible = !pnlLateral.Visible;
+        }
+
+        public void MostrarColumnasLimpieza(string[] columnas)
+        {
+            tiemposLimpiezaControl.MostrarColumnas(columnas);
+        }
+
+        public void MostrarTablaLimpieza(List<string[]> tabla)
+        {
+            tiemposLimpiezaControl.MostrarTabla(tabla);
+        }
+
+        private void ClickBtnAlternar(object sender, EventArgs e)
+        {
+            tiemposLimpiezaControl.Visible = !tiemposLimpiezaControl.Visible;
+            resultadoControl.Visible = !resultadoControl.Visible;
+            btnAlternar.Text = resultadoControl.Visible ? "Ver R-K Limpieza" : "Ver Simulación";
+
+            btnExportar.Visible = (tiemposLimpiezaControl.Visible && tiemposLimpiezaControl.EstaMostrandoTabla()) || resultadoControl.Visible;
+        }
+
+        public bool EstaMostrandoResultado()
+        {
+            return resultadoControl.Visible;
         }
     }
 }

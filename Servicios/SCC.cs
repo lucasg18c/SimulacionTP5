@@ -11,6 +11,7 @@ namespace SimulacionTP5.Servicios
         private List<string[]> finUsoMesa;
         private List<string[]> seccion2;
         private List<string[]> personas;
+        private List<string[]> RKLimpieza;
 
         private double ocioEmpleado1;
         private double ocioEmpleado2;
@@ -28,6 +29,11 @@ namespace SimulacionTP5.Servicios
             "RND",
             "Objetivo",
             "Fin Compra",
+            "RND",
+            "Tiempo entre Inestabilidad",
+            "Próxima Inestabilidad",
+            "Tiempo de Limpieza",
+            "Fin Limpieza",
             "Tiempo Entrega",
             "Empleado 1",
             "Empleado 2",
@@ -40,6 +46,7 @@ namespace SimulacionTP5.Servicios
             "Cola Dueño",
             "Mayor Cola Dueño",
             "AC Tiempo Libre",
+            "Remanente",
             "Estado E1",
             "AC Tiempo Libre E1",
             "Estado E2",
@@ -48,7 +55,25 @@ namespace SimulacionTP5.Servicios
             "Mayor Cola Empleados",
             "AC Tiempo Permanencia Cafetería",
             "AC Tiempo Permanencia Colas",
-            "Contador Clientes"
+            "Contador Clientes",
+            "Contador Personas"
+        };
+
+        private static readonly string[] columnasLimpieza = new string[]
+        {
+            "Tiempo [10 segundos]",
+            "L",
+            "(Li-1) - Li",
+            "k1",
+            "t + h/2",
+            "L + k1 * h/2",
+            "k2",
+            "t + h/2",
+            "L + k2 * h/2",
+            "k3",
+            "t + h",
+            "L + k3 * h",
+            "k4"
         };
 
         public void Simular(int iteraciones, double mostrarDesde, double mostrarHasta, double mediaLlegada, double desviacionLlegada, double desdeFinConsumo, double hastaFinConsumo, double desdeFinUsoMesa, double hastaFinUsoMesa, double tiempoCompra, double mediaEntrega){
@@ -62,6 +87,7 @@ namespace SimulacionTP5.Servicios
             finConsumo = new List<string[]>();
             finUsoMesa = new List<string[]>();
             personas = new List<string[]>();
+            RKLimpieza = new List<string[]>();
             
             actual.Anterior = anterior;
             anterior.Anterior = actual;
@@ -91,6 +117,16 @@ namespace SimulacionTP5.Servicios
             }
 
             RegistrarMetricas(anterior);
+        }
+
+        public List<string[]> GetTablaLimpieza()
+        {
+            return RKLimpieza;
+        }
+
+        public string[] GetColumnasLimpieza()
+        {
+            return columnasLimpieza;
         }
 
         private void RegistrarMetricas(VectorEstado estado)
@@ -150,6 +186,12 @@ namespace SimulacionTP5.Servicios
             finConsumo.Add(estado.MostrarFinConsumo());
             finUsoMesa.Add(estado.MostrarFinUsoMesa());
             personas.Add(estado.MostrarPersonas());
+
+            if (estado.HizoRK())
+            {
+                RKLimpieza.Add(new string[] { "", "", "", "", "", "", "", "", "", "", "", "", "" });
+                RKLimpieza.AddRange(estado.GetRK());
+            }
         }
 
         public string[][] GetSimulacion(){

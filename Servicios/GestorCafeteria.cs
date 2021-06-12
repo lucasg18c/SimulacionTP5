@@ -26,11 +26,13 @@ namespace SimulacionTP5.Servicios
                 CalcularCafeteria();
                 MostrarResultado();
                 form.PermitirExportar(true);
+                form.PermitirAlternar(true);
             }
             catch (Exception e)
             {
                 form.MostrarError(e.Message);
                 form.PermitirExportar(false);
+                form.PermitirAlternar(false);
             }
             finally
             {
@@ -43,6 +45,7 @@ namespace SimulacionTP5.Servicios
             form.MostrarPantallaResultado();
             // Mostrar tabla
             form.LimpiarTabla();
+            form.LimpiarTablaTiemposLimpieza();
 
             form.MostrarColumnas(cafeteria.GetColumnas());
             form.MostrarTabla(cafeteria.GetSimulacion());
@@ -57,6 +60,9 @@ namespace SimulacionTP5.Servicios
                 cafeteria.GetTiempoCafeteria(),
                 cafeteria.GetTiempoColas() 
             );
+
+            form.MostrarColumnasLimpieza(cafeteria.GetColumnasLimpieza());
+            form.MostrarTablaLimpieza(cafeteria.GetTablaLimpieza());
         }
 
         private void CalcularCafeteria()
@@ -93,10 +99,28 @@ namespace SimulacionTP5.Servicios
 
         public void Exportar()
         {
+            string[] columnas;
+            string[][] filas;
+            string mensaje;
             try
             {
+                form.Esperar(true);
+
+                if (form.EstaMostrandoResultado())
+                {
+                    columnas = cafeteria.GetColumnas();
+                    filas = cafeteria.GetSimulacion();
+                    mensaje = "La simulación ha sido copiada a portapapeles! :D";
+                }
+                else
+                {
+                    columnas = cafeteria.GetColumnasLimpieza();
+                    filas = cafeteria.GetTablaLimpieza().ToArray();
+                    mensaje = "La tabla de tiempos de limpieza ha sido copiada a portapapeles ;D";
+                }
+
                 string tabla = "";
-                string[] columnas = cafeteria.GetColumnas();
+                
                 int m = columnas.Length - 1;
 
                 for (int i = 0; i < m + 1; i++)
@@ -108,7 +132,7 @@ namespace SimulacionTP5.Servicios
                 }
                 tabla += "\n";
 
-                string[][] filas = cafeteria.GetSimulacion();
+                
                 int n = filas.Length - 1;
 
                 for (int i = 0; i < n + 1; i++)
@@ -126,11 +150,15 @@ namespace SimulacionTP5.Servicios
                 }
 
                 form.CopiarPortapapeles(tabla);
-                form.MostrarInformacion("La simulación ha sido copiada a portapapeles! :D", "Resultado copiado");
+                form.MostrarInformacion(mensaje, "Resultado copiado");
             }
             catch (Exception e)
             {
                 form.MostrarError("Ocurrió un error al exportar: " + e.Message);
+            }
+            finally
+            {
+                form.Esperar(false);
             }
         }
 

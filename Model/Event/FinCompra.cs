@@ -24,30 +24,25 @@ namespace SimulacionTP5.Model.Event
             AvanzarCola();
         }
 
+        public void FinInterrupcion(double nuevoFin)
+        {
+            Tiempo = nuevoFin;
+        }
+
         private void AvanzarCola()
         {
             if (vectorEstado.Duenio.Cola > 0)
             {
                 vectorEstado.Duenio.ReducirCola();
-                Persona proximaPersona = BuscarProximaEAC();
+                Persona proximaPersona = vectorEstado.BuscarProximaEAC();
                 proximaPersona.SiendoAtendidoCompra();
                 vectorEstado.Duenio.AtenderCompra(proximaPersona);
             }
         }
 
-        /// <summary> Busca la próxima persona en estado Esperando Atención Compra, según su tiempo de llegada.</summary>
-        private Persona BuscarProximaEAC()
+        public void Interrumpir()
         {
-            Persona proxima = null;
-
-            foreach (Persona p in vectorEstado.Personas){
-                if (p.EstaEsperandoAtencionCompra()){
-                    if (proxima == null || p.TiempoLlegada < proxima.TiempoLlegada){
-                        proxima = p;
-                    }
-                }
-            }
-            return proxima;
+            Tiempo = 0;
         }
 
         protected override double CalcularEntreTiempo()

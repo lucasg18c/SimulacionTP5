@@ -10,6 +10,8 @@ namespace SimulacionTP5.Model.Event
         {
             vectorEstado.Reloj = 0;
             vectorEstado.LlegadaPersona.RegistrarEvento();
+
+            vectorEstado.Inestable.RegistrarEvento();
         }
 
         public override string GetNombre()

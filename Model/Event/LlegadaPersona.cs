@@ -20,6 +20,7 @@ namespace SimulacionTP5.Model.Event
         public override void Ejecutar()
         {
             RegistrarEvento();
+            vectorEstado.ContarPersona();
             objetivo = ObjetivoPersona.ObtenerObjetivo(); 
             Persona p = new Persona(vectorEstado);    
             

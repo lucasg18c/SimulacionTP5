@@ -50,7 +50,9 @@
     <Compile Include="Model\Event\FinCompra.cs" />
     <Compile Include="Model\Event\FinConsumo.cs" />
     <Compile Include="Model\Event\FinEntrega.cs" />
+    <Compile Include="Model\Event\FinLimpieza.cs" />
     <Compile Include="Model\Event\FinUsoMesa.cs" />
+    <Compile Include="Model\Event\Inestable.cs" />
     <Compile Include="Model\Event\Inicializar.cs" />
     <Compile Include="Model\Event\LlegadaPersona.cs" />
     <Compile Include="Model\Objetivos\ObjetivoBase.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Model\Objetivos\ObjetivosPersona\ObjetivoPersona.cs" />
     <Compile Include="Model\Objetivos\ObjetivosPersona\UsarMesa.cs" />
     <Compile Include="Model\Objeto\Persona.cs" />
+    <Compile Include="Model\RKLimpieza.cs" />
     <Compile Include="Model\Server\Duenio.cs" />
     <Compile Include="Model\Server\Empleado.cs" />
     <Compile Include="Model\VectorEstado.cs" />
@@ -104,6 +107,12 @@
     <Compile Include="Presentacion\Pantallas\ResultadoControl.Designer.cs">
       <DependentUpon>ResultadoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\Pantallas\TiemposLimpiezaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Pantallas\TiemposLimpiezaControl.Designer.cs">
+      <DependentUpon>TiemposLimpiezaControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Servicios\Generador.cs" />
     <Compile Include="Servicios\SCC.cs" />
     <Compile Include="Presentacion\FrmPrincipal.cs">
@@ -135,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Pantallas\ResultadoControl.resx">
       <DependentUpon>ResultadoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Pantallas\TiemposLimpiezaControl.resx">
+      <DependentUpon>TiemposLimpiezaControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

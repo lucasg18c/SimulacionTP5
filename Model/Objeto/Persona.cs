@@ -20,10 +20,22 @@ namespace SimulacionTP5.Model.Objeto
             };
         }
 
+        public void Desbloquear(double nuevoFin)
+        {
+            SiendoAtendidoCompra();
+            ProximoFin = nuevoFin;
+        }
+
         public void ConsumirEnMesa()
         {
             UsarMesa();
             ProximoFin = vectorEstado.FinConsumo.RegistrarEvento();
+        }
+
+        public void Bloquear()
+        {
+            ProximoFin = 0;
+            Estado = "Bloqueado";
         }
 
         public void ContarCliente()
@@ -63,7 +75,7 @@ namespace SimulacionTP5.Model.Objeto
 
         public void Comprar()
         {
-            if(vectorEstado.Duenio.EstaOcupado()){
+            if(vectorEstado.Duenio.EstaOcupado() || vectorEstado.Duenio.EstaLimpiando()){
                 EsperandoAtencionCompra();
                 vectorEstado.Duenio.AumentarCola();
             }
@@ -169,6 +181,11 @@ namespace SimulacionTP5.Model.Objeto
         public bool EstaUsandoMesa()
         {
             return Estado == "UM";
+        }
+
+        public bool EstaBloqueado()
+        {
+            return Estado == "Bloqueado";
         }
     }
 }
